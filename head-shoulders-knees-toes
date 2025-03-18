@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+use v5.24;
+use strict;
+use warnings;
+use Term::ReadKey;
+
+# Settings:
+my $def_extraroom_lines = 4;  # Some lines to DEDUCT from term height for prompt and stuff
+my $def_theight = 24;
+
+my $clr_sep = "\033[30;1m";
+my $rst = "\033[m";
+my $clr_chunk_fg = "\033[37;1m";
+my $clr_chunk_bg = "\033[48;2;0;30;50m";
+my $cllr = "\033[K"; # clear to eol
+my $cll = "\033[2K"; # clear to eol
+
+# Get terminal height, default to 24 if unknown
+my ($width, $height) = GetTerminalSize();
+if (!defined $height) {
+	say STDERR "Coudln't determine term height. Using $def_theight.";
+	$height = $def_theight;
+}
+
+# Read input
+my @lines = <>;
+my $total_lines = scalar @lines;
+
+# Determine chunk sizes
+my $chunks = 4;
+my $chunk_size = int(($height - $chunks - $def_extraroom_lines) / $chunks);
+
+# Extract and print chunks
+for my $i (0 .. $chunks - 1) {
+	my $start = int($i * $total_lines / $chunks);
+    my $end = $start + $chunk_size - 1;
+    $end = $total_lines - 1 if $end >= $total_lines;
+	print "$clr_chunk_bg$clr_chunk_fg";
+	my @chunk = load_chunk( @lines[$start .. $end] );
+    print map { "$clr_chunk_bg$clr_chunk_fg$cll$_$rst" } @chunk;
+    say "$rst$clr_sep$cll..$rst" if $i < $chunks - 1;
+}
+exit;
+
+sub load_chunk {
+    my @ls = @_;
+    # Remove leading and trailing blank lines
+    while (@ls && $ls[0] =~ /^\s*$/) { shift @ls; }
+    while (@ls && $ls[-1] =~ /^\s*$/) { pop @ls; }
+    return @ls;
+}
+
+
