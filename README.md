@@ -12,6 +12,11 @@
 - Displays four evenly spaced sections from the file.
 - Preserves space for dividers and prompt return.
 
+## Future features (if ever)
+- Syntax highlighting
+- Auto-reduction of count of lines of imports/use/include lines in head
+- Make tons of money off this to support my family (translate to all languages: "this was said tongue-in-cheek"; ie. it was a joke.)
+
 ## Usage
 ```sh
 cat largefile.txt | htt
@@ -30,15 +35,15 @@ ln -s head-shoulders-knees-toes htt
 chmod +x head-shoulders-knees-toes
 ```
 
-## Example Output
+## Output
 ```sh
-{chunk0}
+{chunk0 from top of file}
 ..
-{chunk1}
+{chunk1 from later}
 ..
-{chunk2}
+{chunk2 from later}
 ..
-{chunk3}
+{chunk3 from very end}
 ```
 
 ## Notes
