@@ -7,6 +7,7 @@
 ![Example previewing a python script](i/screenshot1.png)
 
 ## Features
+- Done in perl because it has a very fast load and runtime [compared to python at least]
 - Detects terminal height to determine optimal chunk sizes.
 - Works with piped input or files.
 - Displays four evenly spaced sections from the file.
