@@ -4,6 +4,7 @@
 `head-shoulders-knees-toes` (symlinked as `htt`) is a Perl script designed to preview a file's contents by displaying four evenly spaced chunks from the file in a terminal window. It properly accounts for terminal height, even when receiving piped input.
 
 ## Screenshot(s)
+![Example previewing the script itself](i/screenshot2.png)
 ![Example previewing a python script](i/screenshot1.png)
 
 ## Features
